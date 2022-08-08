@@ -16,9 +16,9 @@ app.get(
   query('swlat')
     .exists()
     .withMessage('south-west latitude is required')
-    .custom(isValidLongitude)
     .isNumeric()
     .withMessage('south-west latitude must be a number')
+    .custom(isValidLongitude)
   ,
   query('swlng').exists().isNumeric(),
   (req, res) => {
