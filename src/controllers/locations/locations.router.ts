@@ -3,6 +3,7 @@ import { query, validationResult } from 'express-validator';
 import isValidLongitude from '../../validators/longitude-validator';
 import { getLocations } from './locations.controller';
 import { handleValidationErrors } from '../validation-error-handler';
+import isValidLatitude from '../../validators/latitude-validator';
 
 const validationRules = [
     query('swlat')
@@ -10,7 +11,7 @@ const validationRules = [
       .withMessage('south-west latitude is required')
       .isNumeric()
       .withMessage('south-west latitude must be a number')
-      .custom(isValidLongitude)
+      .custom(isValidLatitude)
     ,
     query('swlng')
       .exists()
@@ -24,7 +25,7 @@ const validationRules = [
       .withMessage('north-east latitude is required')
       .isNumeric()
       .withMessage('north-east latitude must be a number')
-      .custom(isValidLongitude)
+      .custom(isValidLatitude)
     ,
     query('nelng')
       .exists()
