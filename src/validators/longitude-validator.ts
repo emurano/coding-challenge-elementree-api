@@ -17,12 +17,12 @@ const isValidLongitude: CustomValidator = (value) => {
     throw new Error('longitude must be a number');
   }
 
-  if (latitude < -90) {
-    throw new Error('longitude must be greater than or equal to -90');
+  if (latitude < -180) {
+    throw new Error('longitude must be greater than or equal to -180');
   }
 
-  if (latitude > 90) {
-    throw new Error('longitude must be less than or equal to 90');
+  if (latitude > 180) {
+    throw new Error('longitude must be less than or equal to 180');
   }
 
   return true;
