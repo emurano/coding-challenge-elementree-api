@@ -120,7 +120,7 @@ describe('/locations endpoint', () => {
           expect(res.body).to.have.property('errors');
           expect(res.body.errors).to.deep.include({
             value: '23423',
-            msg: 'latitude must be less than or equal to 180',
+            msg: 'latitude must be less than or equal to 90',
             param: 'swlat',
             location: 'query'
           });
@@ -134,10 +134,10 @@ describe('/locations endpoint', () => {
 
 
   describe('called with all valid query parameters', () => {
-    const swlat = -125.06;
-    const swlng = 35.99;
-    const nelat = -119.79;
-    const nelng = 39.48;
+    const swlat = 35.99;
+    const swlng = -125.06;
+    const nelat = 39.48;
+    const nelng = -119.79;
     const url = `/locations?swlat=${swlat}&swlng=${swlng}&nelat=${nelat}&nelng=${nelng}`;
 
     it('returns status code of 200', (done) => {
@@ -174,61 +174,61 @@ describe('/locations endpoint', () => {
         .get(url)
         .end((err, res) => {
           expect(res.body[0].lat).to.be.within(swlat, nelat);
-          expect(res.body[0].lng).to.be.within(nelat, nelng);
+          expect(res.body[0].lng).to.be.within(swlng, nelng);
           expect(res.body[1].lat).to.be.within(swlat, nelat);
-          expect(res.body[1].lng).to.be.within(nelat, nelng);
+          expect(res.body[1].lng).to.be.within(swlng, nelng);
           expect(res.body[2].lat).to.be.within(swlat, nelat);
-          expect(res.body[2].lng).to.be.within(nelat, nelng);
+          expect(res.body[2].lng).to.be.within(swlng, nelng);
           expect(res.body[3].lat).to.be.within(swlat, nelat);
-          expect(res.body[3].lng).to.be.within(nelat, nelng);
+          expect(res.body[3].lng).to.be.within(swlng, nelng);
           expect(res.body[4].lat).to.be.within(swlat, nelat);
-          expect(res.body[4].lng).to.be.within(nelat, nelng);
+          expect(res.body[4].lng).to.be.within(swlng, nelng);
           expect(res.body[5].lat).to.be.within(swlat, nelat);
-          expect(res.body[5].lng).to.be.within(nelat, nelng);
+          expect(res.body[5].lng).to.be.within(swlng, nelng);
           expect(res.body[6].lat).to.be.within(swlat, nelat);
-          expect(res.body[6].lng).to.be.within(nelat, nelng);
+          expect(res.body[6].lng).to.be.within(swlng, nelng);
           expect(res.body[7].lat).to.be.within(swlat, nelat);
-          expect(res.body[7].lng).to.be.within(nelat, nelng);
+          expect(res.body[7].lng).to.be.within(swlng, nelng);
           expect(res.body[8].lat).to.be.within(swlat, nelat);
-          expect(res.body[8].lng).to.be.within(nelat, nelng);
+          expect(res.body[8].lng).to.be.within(swlng, nelng);
           expect(res.body[9].lat).to.be.within(swlat, nelat);
-          expect(res.body[9].lng).to.be.within(nelat, nelng);
+          expect(res.body[9].lng).to.be.within(swlng, nelng);
           done();
         });
     });
 
-    it('each lat field is between -180 and 180', (done) => {
+    it('each lat field is between -90 and 90', (done) => {
       chai.request(app)
         .get(url)
         .end((err, res) => {
-            expect(res.body[0].lat).to.be.within(-180, 180);
-          expect(res.body[1].lat).to.be.within(-180, 180);
-          expect(res.body[2].lat).to.be.within(-180, 180);
-          expect(res.body[3].lat).to.be.within(-180, 180);
-          expect(res.body[4].lat).to.be.within(-180, 180);
-          expect(res.body[5].lat).to.be.within(-180, 180);
-          expect(res.body[6].lat).to.be.within(-180, 180);
-          expect(res.body[7].lat).to.be.within(-180, 180);
-          expect(res.body[8].lat).to.be.within(-180, 180);
-          expect(res.body[9].lat).to.be.within(-180, 180);
+          expect(res.body[0].lat).to.be.within(-90, 90);
+          expect(res.body[1].lat).to.be.within(-90, 90);
+          expect(res.body[2].lat).to.be.within(-90, 90);
+          expect(res.body[3].lat).to.be.within(-90, 90);
+          expect(res.body[4].lat).to.be.within(-90, 90);
+          expect(res.body[5].lat).to.be.within(-90, 90);
+          expect(res.body[6].lat).to.be.within(-90, 90);
+          expect(res.body[7].lat).to.be.within(-90, 90);
+          expect(res.body[8].lat).to.be.within(-90, 90);
+          expect(res.body[9].lat).to.be.within(-90, 90);
           done();
         });
     });
 
-    it('each lng field is between -90 and 90', (done) => {
+    it('each lng field is between -180 and 180', (done) => {
       chai.request(app)
         .get(url)
         .end((err, res) => {
-          expect(res.body[0].lng).to.be.within(-90, 90);
-          expect(res.body[1].lng).to.be.within(-90, 90);
-          expect(res.body[2].lng).to.be.within(-90, 90);
-          expect(res.body[3].lng).to.be.within(-90, 90);
-          expect(res.body[4].lng).to.be.within(-90, 90);
-          expect(res.body[5].lng).to.be.within(-90, 90);
-          expect(res.body[6].lng).to.be.within(-90, 90);
-          expect(res.body[7].lng).to.be.within(-90, 90);
-          expect(res.body[8].lng).to.be.within(-90, 90);
-          expect(res.body[9].lng).to.be.within(-90, 90);
+          expect(res.body[0].lng).to.be.within(-180, 180);
+          expect(res.body[1].lng).to.be.within(-180, 180);
+          expect(res.body[2].lng).to.be.within(-180, 180);
+          expect(res.body[3].lng).to.be.within(-180, 180);
+          expect(res.body[4].lng).to.be.within(-180, 180);
+          expect(res.body[5].lng).to.be.within(-180, 180);
+          expect(res.body[6].lng).to.be.within(-180, 180);
+          expect(res.body[7].lng).to.be.within(-180, 180);
+          expect(res.body[8].lng).to.be.within(-180, 180);
+          expect(res.body[9].lng).to.be.within(-180, 180);
           done();
         });
     });
